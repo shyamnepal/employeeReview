@@ -1,0 +1,139 @@
+﻿@model UserInfo
+
+@{
+    Layout = "~/Views/Shared/RegisterLayout.cshtml";
+}
+
+<span class="d-none d-lg-block">Registration</span>
+
+<div class="card col-md-12">
+    <div class="card-body">
+        <ul id="progressbar">
+            <li class="active" id="account"><strong>User Info</strong></li>
+            <li id="personal"><strong>Contact Info</strong></li>
+            <li id="payment"><strong>Document Info</strong></li>
+            <li id="confirm"><strong>User Credential</strong></li>
+        </ul>
+    </div>
+</div>
+
+<div class="card">
+ 
+
+    <div class="card-body">
+        
+
+        <div class="pt-4 pb-2">
+            @*<h5 class="card-title text-center pb-0 fs-4">Step 1</h5>*@
+            <h2 class="text-center">Enter your User Info details to create account</h2>
+        </div>
+
+        <form id="registerForm" method="post" asp-action="UserRegisterInfo" asp-controller="Account">
+      
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">First Name<span>*</span></label>
+                        <input type="text" asp-for="FirstName" class="form-control" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Middle Name</label>
+                        <input type="text" asp-for="MiddleName" class="form-control"  />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                </div>              
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Last Name<span>*</span></label>
+                        <input type="text" asp-for="LastName" class="form-control" required />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Date Of Birth<span>*</span></label>
+                        <input type="date" asp-for="DateOfBirth" class="form-control" required />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <input type="hidden" name="UserId" class="form-control" id="UserId" value="@(Model?.UserId)" required>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Gender<span>*</span></label>
+                        <select name="Gender" class="form-control" asp-for="Gender" required>
+                            <option value="">Select ...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Marital Status<span>*</span></label>
+                        <select name="MaritalStatus" class="form-control" asp-for="MaritalStatus" required>
+                            <option value="">Select ...</option>
+                            <option value="Married">Married</option>
+                            <option value="Unmarried">Unmarried</option>
+                        </select>
+                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Select Religion<span>*</span></label>
+                        <select name="Religion" class="form-control" asp-for="Religion" required>
+                            <option value="">Select ...</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Christan">Christan</option>
+                            <option value="Buddhist">Buddhist</option>
+                            <option value="Muslim">Muslim</option>
+                        </select>
+                        <span asp-validation-for="Religion" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Blood Group<span>*</span></label>
+                        <select name="BloodGroup" class="form-control" asp-for="BloodGroup" required>
+                            <option value="">Select Blood Group..</option>
+                            <option value="A+">A+</option>
+                            <option value="AB+">AB+</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <span asp-validation-for="BloodGroup" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+      
+
+            
+
+
+            <div class="col-12">
+
+                <button class="btn btn-primary mt-3 mb-2 w-30" type="submit">Next</button>
+            </div>
+            <div class="col-12">
+                <p class="small mb-0">Already have an account? <a href="@Url.Action("Index", "UserLogin")">Log in</a></p>
+            </div>
+        </form>
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/userinfovalidation.js"></script>
+}

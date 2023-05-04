@@ -1,0 +1,31 @@
+﻿@model Category;
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Category the Review Category</h5>
+
+            <!-- Vertical Form -->
+            <form class="row g-3" asp-action="CreateCategory" asp-controller="Review">
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" asp-for="CategoryName" id="inputNanme4">
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Category Marks</label>
+                    <input type="number" class="form-control" asp-for="CategoryMarks" id="inputNanme4">
+                    <span asp-validation-for="CategoryMarks" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form><!-- Vertical Form -->
+
+        </div>
+    </div>
+
+
+</div>

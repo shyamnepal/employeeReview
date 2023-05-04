@@ -1,0 +1,131 @@
+﻿@model DocumentInfo
+
+@{
+    Layout = "~/Views/Shared/RegisterLayout.cshtml";
+}
+<div class="card col-md-12">
+    <div class="card-body">
+        <ul id="progressbar">
+            <li class="" id="account"><strong>User Info</strong></li>
+            <li id="personal"><strong>Contact Info</strong></li>
+            <li class="active" id="payment"><strong>Document Info</strong></li>
+            <li id="confirm"><strong>User Credential</strong></li>
+        </ul>
+    </div>
+</div>
+
+<div class="card">
+   
+    <div class="card-body">
+
+        <div class="pt-4 pb-2">
+            @*<h5 class="card-title text-center pb-0 fs-4">step 3</h5>*@
+            <h2 class="text-center">Enter your Document Info details to create account</h2>
+        </div>
+
+        <form id="form" method="post" asp-action="CreateDocumentInfo" asp-controller="Account" enctype="multipart/form-data">
+           
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">CitizenshipNumber<span>*</span></label>
+                        <input type="text" asp-for="CitizenshipNumber" class="form-control" />
+                        <span asp-validation-for="CitizenshipNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Citizenship Issue Place<span>*</span></label>
+                        <input type="text" asp-for="CitizenshipIssuePlace" class="form-control" />
+                        <span asp-validation-for="CitizenshipIssuePlace" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <input type="hidden" name="DocumnetId" class="form-control" asp-for="DocumnetId">
+            </div>
+            @if (@ViewBag.Id != null)
+            {
+                <div>
+                    <input type="hidden" name="UserId" value=" @ViewBag.Id" />
+                   
+                </div>
+            }
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Pan Number</label>
+                        <input type="text" asp-for="PanNumber" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Cit Number</label>
+                        <input type="text" asp-for="Citnumber" class="form-control" />
+                 
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Pf Number</label>
+                        <input type="text" asp-for="Pfnumber" class="form-control" />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">SFF Number</label>
+                        <input type="text" asp-for="Sffnumber" class="form-control" />
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Academic Qualification<span>*</span></label>
+                        <input type="text" asp-for="AcademicQualification" class="form-control" />
+                        <span asp-validation-for="AcademicQualification" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Document Type<span>*</span></label>
+                        <select name="SelectDocType" class="form-control" asp-for="SelectDocType" required>
+                            <option value="">Select ...</option>
+                            <option value="Citizenship">Citizenship</option>
+                            <option value="License" >License</option>
+                            <option value="PanCard">Pan Card</option>
+                        </select>
+                        <span asp-validation-for="SelectDocType" class="text-danger"></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Select Document</label>
+                <input type="file" name="Doc" asp-for="Doc" id="Document"  class="form-control" >
+                
+            </div>
+
+            <div>
+                <input type="hidden" name="DocName" asp-for="DocName" class="form-control">
+            </div>
+
+       
+
+            <div class="col-12">
+                <button class="btn btn-primary w-30 mt-3 mb-2" type="button" onclick="location.href='@Url.Action( "GetContact", "Account", new { Id = @ViewBag.contactId })'">previous</button>
+                <button class="btn btn-primary w-30 mt-3 mb-2 ms-5" type="submit">Next</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/documentvalidation.js"></script>
+
+    
+}
+

@@ -1,0 +1,67 @@
+﻿@model List<getReviewWithCategory>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Employee Review</h3>
+
+<p> name: @Model[0]?.FirstName @Model[0]?.LastName</p>
+@{
+    var columnTotals = new double[Model[0].SkillRating.Split(',').Length];
+}
+
+
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th scope="col">Category</th>
+            @foreach (var item in Model)
+        {
+            var ratings = item.SkillRating.Split(',');
+            for (int i = 1; i <= ratings.Length; i++)
+            {
+                    <th>Rating @i</th>
+                    if(i==ratings.Length)
+                        break;
+                }
+                break;
+            }
+            
+            <th scope="col">Aggrigate</th>
+            <th scope="col">SELF</th>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var totalValue = 0.0;
+            var ratings = item.SkillRating.Split(',');
+            <tr>
+                <th scope="row">@item.CategoryName [@item.CategoryMarks]</th>
+
+                @for (int i = 0; i < ratings.Length; i++)
+                {
+                    var ratingValue = (item.CategoryMarks / 5.0) * int.Parse(ratings[i].Trim().Split(' ')[0].Substring(0, 1));
+                    <td>@(Math.Round(ratingValue, 2))</td>
+                    // Add the rating value to the column total
+                    columnTotals[i] += ratingValue;
+                    totalValue += ratingValue;
+                }
+
+                <td>@(Math.Round(totalValue, 2))</td>
+            </tr>
+        }
+
+        <tr>
+            <th>Grand Total</th>
+            
+            @for (int i = 0; i < columnTotals.Length; i++)
+            {
+                <td>@(Math.Round(columnTotals[i], 2))</td>
+               
+            }
+            <td>187</td>
+        </tr>
+    </tbody>
+</table>
+<!-- End Table with stripped rows -->

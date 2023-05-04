@@ -1,0 +1,91 @@
+﻿@model EmployeeReviewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var skillRating = new List<SelectListItem>()
+    {
+    new SelectListItem()
+    {
+        Text = "1-poor",
+        Value ="1-poor"
+    },
+    new SelectListItem()
+    {
+        Text="2-Fair",
+        Value="2-Fair"
+    },
+    new SelectListItem()
+    {
+        Text="3-satisfactory",
+        Value="3-satisfactory"
+    },
+    new SelectListItem()
+    {
+        Text="4-Good",
+        Value="4-Good"
+    },
+    new SelectListItem()
+    {
+        Text="5-Excellence",
+        Value="5-Excellence"
+    },
+
+    };
+}
+
+<form method="post" asp-action="CreateReview" asp-controller="Review">
+    @Html.HiddenFor(x=>x.userinfo.UserId)
+    <h3>@Model?.userinfo.FirstName</h3>
+    <h3>@Model?.userinfo.LastName</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Rating(1-5)</th>
+                <th scope="col">Comment(if any)</th>
+
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.category.Count; i++)
+            {
+                <tr>
+                    <td scope="row">@Model.category[i].CategoryName</td>                   
+                    <td>@Html.DropDownListFor(x=> Model.category[i].employee.SkillRating, skillRating, "Select Rating",  new {@class="form-select"})</td>
+                    <td><textarea asp-for="@Model.category[i].employee.Comment" class="form-control" placeholder="Comment" id="floatingTextarea" style="height: 50px;"></textarea></td>
+                    <td><input type="hidden" asp-for="@Model.category[i].CategoryId" /></td>
+                    <td><input type="hidden" asp-for="@Model.userinfo.UserId" /></td>
+                </tr>
+
+
+
+            }
+
+        </tbody>
+
+        @*        <tbody @for (int i = 0; i <= Model.category.Count; i++)
+        {
+
+        <tr>
+        <th scope="row">@Model.category[i].CategoryName</th>
+        @*                  <td>
+        <select name="Religion" class="form-control" asp-for="" required>
+        <option value="">Select ...</option>
+        <option value="1-poor">1-poor</option>
+        <option value="2-Fair">2-Fair</option>
+        <option value="3-satisfactory">3-satisfactory</option>
+        <option value="4-Good">4-Good</option>
+        <option value="5-Excellence">5-Excellence</option>
+        </select>
+        </td>
+        <td><textarea asp-for="@Model.Employeeskill[i]?.Comment" class="form-control" placeholder="Comment" id="floatingTextarea" style="height: 50px;"></textarea></td>
+        <td><input type="hidden" asp-for="@Model.userinfo?.UserId" /></td>
+        <td><input type="hidden" asp-for="@Model.category[i]?.CategoryId" /></td>*@
+
+
+
+    </table>
+    <input type="submit" vlaue="submit" class="btn btn-primary">
+</form>
+
+<!-- End Table with stripped rows -->

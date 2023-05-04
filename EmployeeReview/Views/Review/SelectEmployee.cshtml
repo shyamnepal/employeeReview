@@ -1,0 +1,33 @@
+﻿@model UserInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var drop = ViewData["allUser"] as List<SelectListItem>;
+}
+
+<div class="col-lg-6">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Select User for Review</h5>
+
+            <!-- Vertical Form -->
+            <form class="row g-3" asp-action="GetReview" asp-controller="Review">
+                
+
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label">Employee  </label>
+                    @Html.DropDownListFor(x=> x.UserId, drop,"Select ",  new {@class="form-select"})
+                </div>
+
+               
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form><!-- Vertical Form -->
+
+        </div>
+    </div>
+ </div>
